@@ -1,0 +1,45 @@
+<md-content class="lesson" flex mk-background="background-900">
+	
+  <h1 id="logger">Logger</h1>
+<ul>
+<li><p>Implement a class named LogEntry, which will hold relevant information for a report. (Severity, Date and Time, Message)</p>
+</li>
+<li><p>Define an interface named ILog, with the following actions:</p>
+<ul>
+<li>Write entry</li>
+<li>Read entries (by date)</li>
+<li>Clear the log</li>
+</ul>
+</li>
+<li><p>Write different implementations for your ILog interface:</p>
+<ul>
+<li>CsvFileLog – Write to a CSV file.</li>
+<li>EncryptedCsvFileLog – Write to a CSV file while encrypting your text (with an encryption of your choice).</li>
+<li>EventLog – Write to the windows event log (so we could view it with the EventViewer)</li>
+</ul>
+</li>
+<li><p>Implement a general Logger class which will hold a certain ILog, and expose writing, reading and clearing actions.</p>
+</li>
+<li><p>Every application needs error handling. Implement the following custom errors:</p>
+<ul>
+<li>NoLogDefinedException</li>
+<li>LogIsFullException</li>
+</ul>
+</li>
+<li><p>Create a console application project, which receives as input the user&#39;s name, and then will present him with four options:</p>
+<ul>
+<li>Blink your right eye</li>
+<li>Blink your left eye</li>
+<li>Administration</li>
+<li>Exit</li>
+</ul>
+</li>
+</ul>
+<p><em>NOTES:</em></p>
+<pre><code>* Write every action performed by this application to the log.
+* When &quot;Administration&quot; is selected, display every log entry written so far.
+* In case of an exception, present the user with a proper message.
+</code></pre>
+
+  
+</md-content>

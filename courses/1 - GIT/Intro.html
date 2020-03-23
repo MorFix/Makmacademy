@@ -1,0 +1,47 @@
+<md-content class="lesson" flex mk-background="background-900">
+	
+  <h1 id="-img-src-assets-git-gitextensions-png-style-height-70px-margin-bottom-13px-git-extensions-introduction"><img src="assets/git/GitExtensions.png" style="height: 70px; margin-bottom: -13px;" /> Git (Extensions) Introduction</h1>
+<p>Git is the most common source control tool. Git is a bash command line and can be used with Git Extensions which
+is a UI interface for running git commands. In Git Extensions most of the commands are available with right click,
+the toolbar buttons or the menu.</p>
+<ul>
+<li>A git practical tutorial is online at <a target="_blank" href="assets/git/learn/">This path</a></li>
+</ul>
+<h3 id="commit">Commit</h3>
+<p>To pack several changes together, you commit them. This is done by selecting changed files (or changed lines in files) and staging them.</p>
+<p><img src="assets/git/Commit.png" /></p>
+<h3 id="push">Push</h3>
+<p>To send the changes to the server for others to pull you simply push them to a server.</p>
+<p>Your git server can be either a repository in TFS (or GitHub outside the army) or even a simple shared directory.</p>
+<p><img src="assets/git/Push.png" /></p>
+<h3 id="branch">Branch</h3>
+<p>Git is based on branches. Although you can work on a single branch, it is recommended to create a new one when starting
+a new task and merging it at the end of the task. It&#39;s also a good idea to have a development branch which will be merged
+to a master branch every time you want to produce a new version of your software.</p>
+<p><img src="assets/git/Branches.png" /></p>
+<h3 id="fetch-pull">Fetch/Pull</h3>
+<p>To get changes from the server you can pull or fetch. Fetching means that you only get the information about the remote
+branches and don&#39;t change anything in your local ones. If you pull you can select what will happen to your branch if it
+has changes (if it will be merged / rebased / fast forwarded ..)</p>
+<p><img src="assets/git/PullFetch.png" /></p>
+<h3 id="merge">Merge</h3>
+<p>You can merge one branch into another to pass all commits combined to it.</p>
+<p><img src="assets/git/Merge.png" /></p>
+<h3 id="rebase">Rebase</h3>
+<p>You can change the history of a branch by telling git to take all of the commits it has, make the branch start from
+a different commit in the head of another branch and replaying all the commits from there.</p>
+<p><img src="assets/git/Rebase.png" /></p>
+<h3 id="-gitignore">.gitignore</h3>
+<p>There is a need to ignore certain files or file types when committing and pushing changes.</p>
+<p>Each line in a .gitignore file specifies a pattern of files or file types to ignore.</p>
+<p>GitExtensions offer you default gitignore patterns. You can use them, but you must double check and customize
+it for your needs.</p>
+<p>For example, you must not commit the node_modules folder when developing a Web application, and clearly
+it differs from the suggested default patterns.</p>
+<p><img src="assets/git/DefaultIgnores.png" /></p>
+<p>But instead filter those file types that are relevant to your project, and\or add some of your own.</p>
+<p><img src="assets/git/WebIgnores.png" /></p>
+<p><img src="assets/git/CSharpIgnores.png" /></p>
+
+  
+</md-content>

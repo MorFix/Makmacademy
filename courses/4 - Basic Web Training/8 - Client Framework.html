@@ -1,0 +1,78 @@
+<md-content class="lesson" flex mk-background="background-900">
+	
+  <p><mk-resource href="assets/web/ex8/ex8.zip"></mk-resource></p>
+<h1 id="client-framework">Client Framework</h1>
+<h2 id="introduction">Introduction</h2>
+<p>After manipulating the DOM all by yourself, you&#39;ll learn a new framework – Angular JS/React (based on your project, ask your tutor).</p>
+<blockquote>
+<p>AngularJS is an MVC framework by Google, its purpose is to allow easier SPA (Single Page Application) development in JS using MVC concepts.</p>
+<p>React is a project by Facebook, a javascript library for building user interfaces</p>
+</blockquote>
+<p>Before starting the exercise, take a few minutes to go over the basic tutorial.</p>
+<p>In this exercise you will go back to our mail application and make it actually do something.</p>
+<p>In addition, you will make it beautiful using Material-Design packages</p>
+<h2 id="pre-requisites">Pre-requisites</h2>
+
+<p><strong>Look it up online</strong></p>
+<p>You&#39;ll have to install the project&#39;s dependencies and then run the server.</p>
+<p>If you read about npm, you probably know this, but still:</p>
+<ul>
+<li>installing dependencies <code>npm install</code></li>
+<li>running the server <code>npm run dev</code></li>
+</ul>
+<p>Use npm to install all client side framework modules:</p>
+<ul>
+<li>installing dependencies <code>npm install --save angular/react</code></li>
+<li>install your awesome UI Components package: <code>npm install --save angular-material/material-ui</code> (see angular-material's pre-requirements)
+<ul><li>see AngularJS Material Design API reference (Google)</a></li></ul>
+</li>
+</ul>
+<h2 id="requirements">Requirements</h2>
+<p>Your mail application will now live inside the client folder in the repository.</p>
+
+<p>Your job is to transform your non-working mail application to a working application, using the provided REST server.
+All communications with the server will use JSON.</p>
+<p>Your mail will support the following actions:</p>
+<ul>
+<li>View incoming mail<ul>
+<li>View a list of all incoming mail</li>
+<li>Viewing a specific mail</li>
+</ul>
+</li>
+<li>View outgoing mail<ul>
+<li>View a list of all outgoing mail</li>
+<li>Viewing a specific mail</li>
+</ul>
+</li>
+<li>Send new mails, the new mails will be shown in the outgoing mail</li>
+</ul>
+<h2 id="api">Api</h2>
+<p>The provided server works with a classic REST api.</p>
+<h3 id="incoming-mails-incoming">Incoming Mails - /incoming</h3>
+<ul>
+<li><code>GET /</code> - Returns all incoming mails, long mail content will be trimmed.</li>
+<li><code>GET /:id</code> - Returns all data of a specified mail, long content is NOT trimmed.</li>
+<li><code>DELETE /:id</code> - Deletes a specified mail.</li>
+</ul>
+<h3 id="outgoing-mails-outgoing">Outgoing Mails - /outgoing</h3>
+<ul>
+<li><code>GET /</code> - Returns all outgoing mails, long mail content will be trimmed.</li>
+<li><code>GET /:id</code> - Returns all data of a specified mail, long content is NOT trimmed.</li>
+<li><code>POST /</code> - Sends a new mail, the mail should be a JSON object conforming to the mail structure without an ID.</li>
+<li><code>DELETE /:id</code> - Deletes a specified mail.</li>
+</ul>
+<h2 id="notes">Notes</h2>
+<ul>
+<li>AngularJS<ul>
+<li>Use angular-ui-router for routing.</li>
+<li>Set up all of angular's pre-requirments (for angular's dependency-injection service).
+<ul><li><code>└&gt angular.module('APP_NAME', [... 'ngResource', 'ngMaterial' ...]);</code></li></ul>
+</li>
+<li>Use services when possible.</li>
+<li>Define a directive/component for a single mail.</li>
+</ul>
+</li>
+</ul>
+
+  
+</md-content>

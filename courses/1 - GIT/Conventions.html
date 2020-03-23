@@ -1,0 +1,72 @@
+<md-content class="lesson" flex mk-background="background-900">
+	
+  <h1 id="conventions">Conventions</h1>
+<h2 id="do-not-push-to-dev">Do not push to DEV</h2>
+<p>Go through the whole process of creating a branch, create and get an approval of a pull request and then merge your branch to dev</p>
+<h2 id="1-commit-per-branch-merge-your-commits">1 Commit per Branch - Merge your commits</h2>
+<h2 id="detailed-commits">Detailed commits</h2>
+<ul>
+<li><p>Wrong:</p>
+<ul>
+<li>oopsi #NONE</li>
+<li>fixed some stuff in pm #123</li>
+<li>renamed file</li>
+<li>now there is a sheker in pm</li>
+</ul>
+</li>
+<li><p>Types</p>
+<ul>
+<li>feat - A new feature</li>
+<li>fix - A bug fix</li>
+<li>docs - Documentation only changes</li>
+<li>style - Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)</li>
+<li>refactor - A code change that neither fixes a bug nor adds a feature</li>
+<li>perf - A code change that improves performance</li>
+<li>test - Adding missing tests</li>
+<li>chore- Changes to the build process or Auxiliary tools and libraries such as documentation generation</li>
+</ul>
+</li>
+<li><p>Good:</p>
+<ul>
+<li>fix(pm): no sheker in pm view</li>
+<li>feat(profile): added sheker</li>
+<li>docs(pm): docs for sheker</li>
+<li>test(pm): more sheker tests</li>
+<li>style(pm): missing color in pm</li>
+<li>pref(gulp): made x task async</li>
+</ul>
+</li>
+</ul>
+<h2 id="branch-names">Branch Names</h2>
+<ul>
+<li><p>Wrong:</p>
+<ul>
+<li>RPV#36135GeneralBugFix</li>
+<li>ShekerUnitTest</li>
+</ul>
+</li>
+<li><p>Good:</p>
+<ul>
+<li>fix/rpv-validations</li>
+<li>test/sheker-get-value</li>
+</ul>
+</li>
+</ul>
+<h2 id="pull-requests">Pull Requests</h2>
+<h3 id="what-is-required-">What is required:</h3>
+<pre><code>* Code Style
+* Testing (for new features)
+* Performance
+</code></pre>
+<h3 id="who-is-required-">Who is required:</h3>
+<pre><code>* Team Leader
+* Experienced Programmers
+* Related Programmers
+</code></pre>
+<h2 id="versioning">Versioning</h2>
+<p><img src="assets/git/VersionMajor.png" />
+<img src="assets/git/VersionMinor.png" />
+<img src="assets/git/VersionPatch.png" /></p>
+
+  
+</md-content>

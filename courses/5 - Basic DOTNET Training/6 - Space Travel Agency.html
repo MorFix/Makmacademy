@@ -1,0 +1,24 @@
+<md-content class="lesson" flex mk-background="background-900">
+	
+  <p><mk-resource href="assets/net/SpaceTravelAgency.dll"></mk-resource></p>
+<h1 id="space-travel-agency">Space Travel Agency</h1>
+<h3 id="read-before">Read Before</h3>
+<ul>
+<li>ThreadPool</li>
+<li>Tasks</li>
+</ul>
+<p><em>This exercise should be done using Windows Forms</em></p>
+<p>In this exercise you will create an application for a space travel agency, the agency allows users to fly in a spaceship.</p>
+<p>The supplied DLL (Download button above) does all the heavy-lifting for actually managing the spaceships, you will use it to order and launch spaceships for the user, but launching spaceships is hard work and we want our client to be responsive so you will make sure the heavy-lifting is done in parallel and the main thread is free to respond to the user.</p>
+<p>Ordering and launching a spaceship consists of the following stages in this order:</p>
+<ol>
+<li>Ordering a spaceship</li>
+<li>Unlocking the spaceship using a password and a fingerprint <b>together</b></li>
+<li>Ordering a pilot</li>
+<li>Assembling a crew of 5 aliens, the entire crew must be assembled together otherwise no one will come</li>
+<li>Launching the spaceship</li>
+</ol>
+<p>When needed run methods on the threadpool, and when needed use tasks.</p>
+
+  
+</md-content>

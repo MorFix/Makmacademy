@@ -1,0 +1,71 @@
+<md-content class="lesson" flex mk-background="background-900">
+	
+  <p><mk-resource href="assets/net/ex_1_example.zip"></mk-resource></p>
+<h1 id="the-zoo">The Zoo</h1>
+<p>Welcome to our amazing .NET training!</p>
+<p>You are going to create a migratable zoo with many fun animals.</p>
+<p>Our zoo will have the following animals:</p>
+<ol>
+<li>Elephant - a mammal with the following properties:<ul>
+<li>TrunkLength</li>
+<li>Tusks - a number represeting the number of tusks</li>
+</ul>
+</li>
+<li>Tiger - a mammal with the following properties:<ul>
+<li>Stripes - number of stripes on the tiger</li>
+<li>HumansEaten - number of humans eaten</li>
+</ul>
+</li>
+<li>Otter - a mammal with the following properties:<ul>
+<li>FavoriteRock - another object representing the otter&#39;s favorite rock<ul>
+<li>Unfortunately the Favorite rock has weight</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Shark - a fish with the following properties:<ul>
+<li>Type - the shark&#39;s type, can be one of the following:<ol>
+<li>GreatWhite</li>
+<li>Hammerhead</li>
+<li>Loan</li>
+</ol>
+</li>
+<li>IsLawyer</li>
+</ul>
+</li>
+<li>Chameleon - a lizzard with the following properties:<ul>
+<li>CurrentColor</li>
+</ul>
+</li>
+<li>Ostrich - a big-ass bird with the following properties:<ul>
+<li>IsHeadInGround</li>
+</ul>
+</li>
+</ol>
+<p>In addition to this, all animals have the following properties:</p>
+<ul>
+<li>Name</li>
+<li>Age</li>
+<li>Gender</li>
+<li>Favorite human starting with the first letter of their name</li>
+</ul>
+<p>Pay attention to correct inheritance in your classes.</p>
+<p>After creating the classes, we need our zoo to be migratable. In order to do that our animals must be serializable.</p>
+<p>To do that, we will create an interface called <code>ISerializableObject</code> with a single method returning a dictionary with the animal&#39;s properties and values. (DO NOT USE ANY FRAMEWORK INTERFACE/CLASS!!1)
+For example, the basic implementation for Animal will return:
+<code>{
+    &quot;Name&quot;: &quot;Rexi&quot;,
+    &quot;Age&quot;: 5,
+    &quot;Gender&quot;: &quot;Male&quot;
+}</code></p>
+<p>After implementing the <code>ISerializableObject</code> in your classes, we will create the following serializers:</p>
+<ul>
+<li>CsvSerializer - Serializes the objects to a CSV file (one csv file for all the animals in the zoo)</li>
+<li>JsonSerializer - Serializes the objects as JSON to a file (one json for all the animals in the zoo)
+Download the examples to check if your serializers work correctly</li>
+</ul>
+<p><em>NOTE</em>: Don&#39;t use reflaction.
+<em>NOTE</em>: When using the file system, some errors may occur, make sure you handle them correctly.</p>
+
+  
+</md-content>

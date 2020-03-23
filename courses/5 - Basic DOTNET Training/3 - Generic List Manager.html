@@ -1,0 +1,40 @@
+<md-content class="lesson" flex mk-background="background-900">
+	
+  <h1 id="generic-list-manager-delegates-events-generics">Generic List Manager - Delegates &amp; Events, Generics</h1>
+<p>In this exercise you will implement a generic doubly linked list named SuperList<T> (Implemented using Node<T>). </p>
+<p>The list will implement the framework&#39;s generic IList<T> interface to support the following:</p>
+<ol>
+<li>Add an item</li>
+<li>Remove an item</li>
+<li>Direct access to an item (indexer)</li>
+<li>Enumeration with ForEach</li>
+</ol>
+<p>In addition to the IList methods, the list will implement methods that will perform a given action (Action/Func) on:</p>
+<ol>
+<li>A certain item</li>
+<li>All the items</li>
+<li>All the items that meet a given criteria (Predicate)</li>
+</ol>
+<p>The list should expose an event of a change in the items (adding, removing), add the event information required (think of EventArgs).</p>
+<h2 id="simple-bank">Simple Bank</h2>
+<p>You will now use your list to create a simple bank management app.</p>
+<p>The basic models will be SimpleAccount and VipAccount, both will have the following actions:</p>
+<ul>
+<li>Deposit - Add a sum of money to the account&#39;s balance</li>
+<li>Withdraw - Take a sum of money from the account&#39;s balance</li>
+</ul>
+<p>Both of the account types will behave almost the same except for the Withdraw, where SimpleAccount isn&#39;t allowed to be in overdraft while the VipAccount is allowed.</p>
+<p>The application will be a simple console application and will allow the following actions:</p>
+<ol>
+<li>Add an account</li>
+<li>Remove an account</li>
+<li>Deposit a certain amount to an account \ everyone</li>
+<li>Withdraw</li>
+<li>Every action you&#39;ve performed needs to be logged using the logger you wrote previously</li>
+</ol>
+<p>Our application needs to be pretty and in order to do that it will support changing the console&#39;s text color.</p>
+<p>Implement <code>ColorWriter</code> class, this will be the only class that writes to the console and it will contain all the required actions for color support.</p>
+<p><em>NOTE:</em> The application should handle exceptions and errors properly and display correct messages to the user.</p>
+
+  
+</md-content>

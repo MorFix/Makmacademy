@@ -1,0 +1,84 @@
+<md-content class="lesson" flex mk-background="background-900">
+	
+  <h1 id="ssl">SSL</h1>
+<h2 id="general">General</h2>
+<p>In order to setup HTTPS on a web server you need an RSA certificate.
+The HTTPS protocol works on port 443 (the browser accesses this port automatically when opening an https page).</p>
+<h3 id="read-about">Read about</h3>
+<ul>
+<li>RSA encryption</li>
+<li>HTTPS / SSL</li>
+<li>CA (Certificate Authority)</li>
+</ul>
+<h2 id="creating-a-new-certificate">Creating a new certificate</h2>
+<ol>
+<li>Open Run -&gt; write &quot;mmc&quot; -&gt; ENTER (Opens console root)</li>
+<li>Ctrl+M -&gt; Add/Remove Snap-in<ul>
+<li>Double click on Certificates</li>
+<li>Mark Computer Account</li>
+<li>Mark Local Computer</li>
+<li>Finish -&gt; Ok</li>
+</ul>
+</li>
+<li><p>Personal -&gt; Certificates -&gt; Right click Certificates -&gt; All Tasks -&gt; Request New Certificate
+ The CA (The Certificate Authority that the computers in the domain trust) is responsible for creating the Certificate.</p>
+<ul>
+<li><p>Click Next Twice -&gt; And choose the right template (in our case it&#39;s Web Server) And define a Subject Name by clicking on the message</p>
+<p><img src="assets/infra/SSL1.png" /></p>
+</li>
+</ul>
+</li>
+<li><p>The name of the certificate needs to be as the server name (Hostname, IP, Alias or DNS name) - in the format of CN=DNSNAME</p>
+<ul>
+<li><p>Pay Attention: Use the DNS for the CN, because you will want to use the DNS and not the hostname or IP in the browser.
+In the following example the hostname is used:</p>
+<p><img src="assets/infra/SSL2.png" /></p>
+</li>
+</ul>
+</li>
+<li><p>Click on Add -&gt; Ok -&gt; Enroll. The Certificate should be now accessible through Certificates -&gt; Personal when you are in Local Computer.</p>
+</li>
+</ol>
+<h2 id="mapping-the-certificate-to-the-correct-port">Mapping the Certificate to the correct Port</h2>
+<ol>
+<li>In order to map the Certificate you need to copy it&#39;s Thumbprint (which is it&#39;s Hash). You can do it using the same way you created
+the Certificate.<ul>
+<li>Double click on the Certificate</li>
+<li>Details -&gt; Thumbprint</li>
+</ul>
+</li>
+<li>Copy the Thumbprint into Notepad and delete all the whitespaces.<pre><code>* Pay Attention: When copying the thumbprint, the first character is an empty character that you won&#39;t
+    be able to see, so make sure you delete it in the Notepad.
+</code></pre>
+</li>
+<li>Find the GUID of your Project.<ul>
+<li>For .NET : Retrieve it from the Assembly-info under Properties.</li>
+</ul>
+</li>
+<li>Open CMD</li>
+<li><p>To map the port <em>443</em> to the Certificate (Which the Thumbprint you copied belongs to) to the Application:</p>
+<p> If your Application doesn&#39;t run on port 80 (it&#39;s SSL parallel is 443), change 443 in the command to the custom port you&#39;re using.</p>
+<p> To map the Certificate to work with a Cluster and not only with the server you should replace <em>0.0.0.0</em> to the IP of the Cluster.</p>
+<p> ipport(0.0.0.0 or Cluster IP, and the chosen port), certhash is the Certificate&#39;s Thumbprint. appid is the GUID of your Application.</p>
+<p> Run the following command:</p>
+<pre><code>* netsh http add sslcert ipport=0.0.0.0:443 certhash=5b8de3036b53152c11a77fc2e6de3e82d015c1a5 appid={979c6316-99ac-4182-9386-e0266d080a34}
+</code></pre>
+</li>
+<li><p>You need to open the port&#39;s access to everyone:</p>
+<pre><code>* netsh http add urlacl url=https://+:443/ user=Everyone
+</code></pre>
+</li>
+<li><p>In case you need to delete the Certificate&#39;s mapping (the command you&#39;ve run in 5) run the following command:</p>
+<pre><code>* netsh http delete sslcert ipport=0.0.0.0:443
+</code></pre>
+</li>
+<li><p>In case you need to revoke the permission for everyone (the command you&#39;ve run in 6):</p>
+<pre><code>* netsh http delete urlacl url=https://+:443/
+</code></pre>
+</li>
+<li>Enable SSL in your Application&#39;s code.<ul>
+<li>For example, in a .NET project that uses Owin, change http to https in the website&#39;s address when calling WebApp.Start</li>
+</ul>
+</li>
+</ol> 
+</md-content>

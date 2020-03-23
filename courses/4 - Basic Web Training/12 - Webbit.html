@@ -1,0 +1,62 @@
+<md-content class="lesson" flex mk-background="background-900">
+	
+  <p><mk-resource href="assets/web/webbit.zip"></mk-resource></p>
+<h1 id="putting-it-all-together-webbit">Putting it all together – Webbit</h1>
+<p>Congratulations! You are now at the final exercise, but this isn&#39;t over yet.</p>
+<h2 id="part-1-basic-project">Part 1 - Basic Project</h2>
+<p>In the first part of this exercise, you will receive an almost complete web app.
+Your mission is to complete the app, and make it work.
+Use best practices and design patterns to make sure the project runs correctly,
+You will have to defend the entire code-base in a code review so make sure you
+understand <b>every</b> line of code.</p>
+<p>Explore the packages and concepts brought to you in the project:</p>
+<ul>
+<li>Babel</li>
+<li>Webpack</li>
+<li>Authentication</li>
+</ul>
+<h2 id="part-2-webbit">Part 2 - Webbit</h2>
+<h2 id="1-main-concept">1.    Main Concept</h2>
+<p>The site will be a user-provided content site resembling www.reddit.com.</p>
+<p>The site will have infinite number of &quot;subwebbits&quot;, each dedicated for a subject (their name, will be unique).</p>
+<p>Inside a subwebbit, users posts new threads. For simplicity, a thread&#39;s content will be text only. Users can comment on a thread and say whatever they want, users may also comment on these comments, but again, for simplicity, only root comments can have comments.</p>
+<h2 id="2-detailed-requirements">2.    Detailed Requirements</h2>
+<h3 id="2-1-subwebbit">2.1.    Subwebbit</h3>
+<p>A subwebbit acts like a container for relevant threads. Every subwebbit is named for its subject (AskWebbit for questions to users, News for posting news etc…).</p>
+<p>Every user can post and see inside every subwebbit, but only the owner (creator of the subwebbit) can delete threads inside the subwebbit.</p>
+<p>When a user asks for a non-existing subwebbit, he will be given the opportunity to create the requested one and own it.</p>
+<p>The owner may also delete the entire subwebbit, removing all threads inside.
+When browsing a subwebbit, all threads will be ordered from new to old.</p>
+<h3 id="2-2-thread">2.2.    Thread</h3>
+<p>The basic unit of content is a thread. A thread consists of an author, subject, content (again, text only for simplicity), date of creation and rating.</p>
+<p>The rating system will be the upvote/downvote system and will be specified later in this document.</p>
+<h3 id="2-3-comment">2.3.    Comment</h3>
+<p>Users may comment on a thread, providing information, expressing opinion and saying stupid things.
+A comment consists of an author, content, date of creation and rating.</p>
+<p>The rating system will be the same upvote/downvote system.</p>
+<p>Inside a thread comments will be ordered according to their rating, from most rated to lowest.</p>
+<p>A root comment is a comment for a thread. Root comments may have sub-comments on them, acting like regular comments. Sub-comments can&#39;t have comments to avoid complexity.</p>
+<h3 id="2-4-user">2.4.    User</h3>
+<p>People must register and login before they can enter the site. Users register with a username and a password.</p>
+<p>A user has a list of subscribed subwebbits, upon registering this list will be initialized with the 10 most subscribed subwebbits so the user will start by enjoying the best content.</p>
+<p>Like mentioned in the subwebbit section, a user can own subwebbits by creating them.</p>
+<p>A user should be able to view his subscribed subwebbits - be it a page or anything out of your imagination.</p>
+<h3 id="2-5-front-page">2.5.    Front Page</h3>
+<p>The homepage will act like a subwebbit, but it will not be an actual one. Instead, it will show all threads from the user&#39;s subscribed subwebbits, ordered by rating.</p>
+<p>In the front page users may not post new threads, instead they must go to their desired subwebbit and post there.</p>
+<h3 id="2-6-rating-system">2.6.    Rating System</h3>
+<p>Since our site is a user-provided content site, we need to provide users with a way of voting what content is good and what is bad. The rating system will be relatively simple – 
+Every vote-able content will have two buttons:</p>
+<ul>
+<li>Upvote – Increases the content&#39;s rating by one.</li>
+<li>Downvote – Decreases the content&#39;s rating by one, rating may be negative.</li>
+</ul>
+<p>A user may only vote once on every vote-able item, voting again removes the user&#39;s last vote.</p>
+<h2 id="closing-notes">Closing Notes</h2>
+<p>Take your time, make sure you truly understand every new concept that&#39;s introduced
+both in server and client sides of the web app, and if you don&#39;t - then either
+do your research or ask your trainer for further explanations.</p>
+<p>Good luck!</p>
+
+  
+</md-content>

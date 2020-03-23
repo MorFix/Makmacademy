@@ -1,0 +1,25 @@
+<md-content class="lesson" flex mk-background="background-900">
+	
+  <h1 id="troubleshooting">Troubleshooting</h1>
+<h3 id="always-commit">Always commit</h3>
+<p>When you commit a change you can be certain you will never lose it. If you stash something and delete the stash you can
+be sorry later. If you reset uncommitted changes you also might suffer.
+But if you commit something. You can always find it later.</p>
+<h3 id="reflog">Reflog</h3>
+<p>The reflog is a great tool for going back in history. You can revert any change in the git tree. (undo branch reset,
+commit, rebase, pull, etc..).
+In order to go back in history open 2 git bashes:</p>
+<p><img src="assets/git/BashButton.png" /></p>
+<p>In the first one write:</p>
+<pre><code>git reflog
+</code></pre>
+<p>And find the head position you want to go to, then write in the second bash (let&#39;s say for position 10 in the HEAD):</p>
+<pre><code>git reset --hard HEAD@{10}
+</code></pre>
+<p><img src="assets/git/HardReset.png" /></p>
+<p>In this example, I wanted to go back to when I commited &quot;fix(sidenav-unread): show number of unread chats ...&quot;.</p>
+<p>Now you can refresh git extensions and see you went back in time!</p>
+<p>Even this action it-self is revertable using the the same technique.</p>
+
+  
+</md-content>

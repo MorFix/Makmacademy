@@ -1,0 +1,147 @@
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background: gray;
+}
+::-webkit-scrollbar-track {
+  width: 8px;
+  height: 8px;
+  background: gray;
+}
+
+::-webkit-scrollbar:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+pre {
+	word-wrap: break-word;
+	background: rgba(0, 0, 0, 0.4);
+	padding: 8px;
+	border-radius: 3px;
+}
+
+.lesson {
+	padding: 8px;
+	position: relative;
+	line-height: 1.33em;
+}
+
+.lesson a, .lesson a:active, .lesson a:hover, .lesson a:visited {
+	color: white;
+}
+
+.lesson mk-resource {
+  position: fixed;
+  top: 72px;
+  right: 16px;
+  font-size: 24px;
+}
+
+.lesson mk-resource .md-button {
+	border-radius: 3px;
+}
+
+.lesson mk-resource i.mdi {
+	font-size: 24px;
+}
+
+.courses  {
+	overflow: auto;
+  margin-bottom: 8px;
+}
+
+mk-course {
+	display: flex;
+	flex-direction: column;
+}
+
+mk-course .md-button {
+	padding-left: 24px;
+	display: flex;
+	margin: 0;
+	color: white;
+	border-radius: 0;
+}
+
+mk-course .md-button .mdi {
+	transition: 0.3s transform cubic-bezier(0.35, 0, 0.25, 1);	
+	margin-right: 8px;
+}
+
+mk-course .md-button.toggled .mdi {
+	transform: rotateZ(90deg);
+}
+
+mk-course .lessons {
+	transition: 0.3s all cubic-bezier(0.35, 0, 0.25, 1);
+	opacity: 1;
+	height: initial;
+	padding: 0;
+}
+
+mk-course .lessons.ng-hide {
+	opacity: 0;
+	height: 0;
+}
+
+mk-course .lessons .item {
+	color: white;
+	padding: 0;
+}
+
+.lesson.rtl {
+	direction: rtl;
+}
+
+.lesson h1 {
+	margin-top: 8px;
+  font-size: 56px;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  line-height: 56px; 
+}
+
+.lesson h2 {
+  font-size: 34px;
+  font-weight: 400;
+  line-height: 40px; 
+}
+
+.lesson h3 {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px; 
+}
+
+.lesson h4 {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.005em; 
+}
+
+.love {
+	padding: 4px;
+	font-size:12px;
+}
+
+.love .mdi {
+	margin: 0 4px;
+}
+
+.timestamp {
+	padding: 4px;
+	font-size: 12px;
+}
+
+p > code,
+li > code {
+	padding: 2px 4px;
+	font-size: 90%;
+	color: #83d6ff;
+	background-color: #000206;
+	border-radius: 3px;
+}

@@ -1,0 +1,58 @@
+﻿<md-content class="lesson" flex mk-background="background-900">
+<h1 id="dive-to-javascript">Dive into JavaScript</h1>
+<p><mk-resource href="assets/web/ex6/ow.zip"></mk-resource></p>
+<p>Unlike previous exercises you will run you code with Node.js and not in the browser</p>
+<p>You will meet a new tool today:</p>
+<ul>
+<li><code>npm</code> – Node.js package manager</li>
+</ul>
+<p>Kick-off your project with the following command :</p>
+<pre><code class="lang-js">npm init
+// see what options it asks you to pass and what's the output (be curious about it)
+</code></pre>
+<h3 id="step-up-cadet-">Step up cadet 💂!</h3>
+<p>We got a crucial information about the worlds greatest heroes and the worlds most vicious assassins!</p>
+<p>But unfortunately we got their information separated into 3 lists - their names, their roles and their hp!</p>
+<p>Before you start, download the attached <code>.json</code> file.</p>
+<ul>
+<li>Assemble a heroes list of objects with the properties mentioned above</li>
+</ul>
+<pre><code class="lang-js">// input
+const names = [&#39;Mercy&#39;, &#39;Genji&#39;, &#39;Zarya&#39;];
+const roles = [&#39;Support&#39;, &#39;Offense&#39;, &#39;Tank&#39;];
+
+const getHeroes = ???
+
+// output
+console.log(getHeroes()) // -&gt; [{name: &#39;Mercy&#39;, role: &#39;Support&#39;}, {name: &#39;Genji&#39;, role: &#39;Offense&#39;}, {name: &#39;Zarya&#39;, role: &#39;Tank&#39;}]
+</code></pre>
+<ul>
+<li>Create a <code>groupBy</code> functionality so we can easily classify them by any property. Use <code>role</code> as the default property</li>
+</ul>
+<pre><code class="lang-js">console.log(groupBy(heroes));
+// └&gt; { Support: [{name: &#39;Mercy&#39;, role: &#39;Support&#39;}], Offense: [{name: &#39;Genji&#39;, role: &#39;Offense&#39;}], Tank: [{name: &#39;Zarya&#39;, role: &#39;Tank&#39;}]}
+
+console.log(groupBy(heroes, &#39;name&#39;));
+// └&gt; { Mercy: [{name: &#39;Mercy&#39;, role: &#39;Support&#39;}], Genji: [{name: &#39;Genji&#39;, role: &#39;Offense&#39;}], Zarya: [{name: &#39;Zarya&#39;, role: &#39;Tank&#39;}]}
+</code></pre>
+<ul>
+<li>Create a <code>getByRoles</code> that can get what roles we want as parameters</li>
+</ul>
+<pre><code class="lang-js">console.log(getByRoles(heroes, &#39;Offense&#39;)); // -&gt;  [{name: &#39;Genji&#39;, role: &#39;Offense&#39;}]
+console.log(getByRoles(heroes, &#39;Support&#39;, &#39;Offense&#39;)); // -&gt;  [{name: &#39;Mercy&#39;, role: &#39;Support&#39;}, {name: &#39;Genji&#39;, role: &#39;Offense&#39;}]
+</code></pre>
+<ul>
+<li>And last, we want to make all of them nice! Iterate through the heroes and add a functionality to <code>sayHello</code> and print<ul>
+<li><code>Hi! My name is ____________, nice to meet you!</code></li>
+</ul>
+</li>
+</ul>
+<pre><code class="lang-js">const niceHeroes = makeHeroesNice(getHeroes());
+niceHeroes[0].sayHello() // -&gt; &#39;Hi! My name is Mercy, nice to meet you!&#39;
+</code></pre>
+<h2 id="notes">Notes</h2>
+<ul>
+<li>Make your <em>code</em> beautiful!</li>
+<li>Use linting as you develop (see package eslint-config-noamokman at your neighborhood-friendly npm registry).</li>
+</ul>
+</md-content>

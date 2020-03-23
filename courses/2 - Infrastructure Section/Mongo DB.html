@@ -1,0 +1,86 @@
+<md-content class="lesson" flex mk-background="background-900">
+	
+  <h1 id="mongodb">MongoDB</h1>
+<h2 id="read-and-explore">Read and Explore</h2>
+<h3 id="introduction-to-mongodb">Introduction to MongoDB</h3>
+<ol>
+<li>Databases in general. What is SQL, NoSQL and the differences?</li>
+<li>Introduction to MongoDB, and how does it work?</li>
+<li>Basic operations in MongoDB - CRUD.</li>
+<li>Install MongoDB and dive into the Mongo Shell - perform basic actions with records (CRUD).</li>
+<li>Journaling</li>
+<li>Sharding</li>
+<li>Capped collections, Indexes</li>
+<li>Automatic Failover, High Availability, Elections</li>
+<li>ObjectID vs Mongoref</li>
+<li>Write concern</li>
+<li>Complete Lesson 12 in Basic Web Training</li>
+</ol>
+<h3 id="working-with-the-mongodb-driver-replica-set">Working with the MongoDB Driver &amp; Replica Set</h3>
+<ol>
+<li>Replication in general - different kinds of Replication and their differences</li>
+<li>Master-Slave vs ReplicaSet</li>
+<li>Setup a Replica Set with your computer as the Primary node, and the rest of your team as the secondaries. (Add an Arbiter if needed)</li>
+</ol>
+<h3 id="mongodb-in-linux">MongoDB in Linux</h3>
+<ol>
+<li>MongoDB&#39;s configurations - what could you change, and think about what&#39;s important for us to change</li>
+<li>We have removed almost every single authentication methods, but it&#39;s important to read and know
+About the different ones and when and why you should use them (There is a detailed SSL lesson
+that you should read)</li>
+</ol>
+<h2 id="background">Background</h2>
+<ol>
+<li><p>MongoDB is deployed in every site as a Slave and in the hearts as a Master with ReplicaSet</p>
+</li>
+<li><p>Every server runs on port 10100</p>
+</li>
+<li><p>In every server there is a configuration file mongo.conf that defines:</p>
+<pre><code>* Every user has a different role, thus different permissions
+* Auditing
+* Port definition
+* ReplicaSet definition
+</code></pre>
+</li>
+</ol>
+<h2 id="auditing">Auditing</h2>
+<p>MongoDB has an ability to document significant actions, and we configured it to write into a JSON file,</p>
+<p>The documented actions are:</p>
+<pre><code>* Changes in properties of a collection - DDL
+* Changes in the ReplicaSet
+* Authentication and login of users
+* Common actions like deleting an index/collection etc.
+</code></pre>
+<h2 id="log">Log</h2>
+<p>Every action is written into a Log file</p>
+<h2 id="replicaset">ReplicaSet</h2>
+<ol>
+<li>ReplicaSet is a kind of replication with Automatic Failover, it means that when one of the servers is down,</li>
+</ol>
+<p>a transition into another server occurs which will receive the write queries</p>
+<ol>
+<li>In this kind of Replication, there&#39;s a voting mechanism. When a server fails,
+all the servers vote for the highest priority</li>
+</ol>
+<p>server that eventually gets elected to being the Primary</p>
+<ol>
+<li>There are 3 kinds of servers :<pre><code>* One that could become Primary
+* One that could vote, but can&#39;t be elected.
+* One that can&#39;t vote and can&#39;t get elected.
+</code></pre>
+</li>
+</ol>
+<h2 id="mongodb-installation-guide">MongoDB installation guide</h2>
+<p>Under the Infrastructure Team&#39;s Documents lies the full MongoDB installation, detailed and everything.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p>There is a detailed MongoDB troubleshooting guide
+useful linux commands:</p>
+<ul>
+<li><code>top</code> - To see memory and CPU usage</li>
+<li><code>tail /path/to/logFile.log -f</code> - see the mongo&#39;s log in real time</li>
+<li><code>mongostat</code> - a profiler to mongo - use the ssl connection string to connect to it.
+for example:  ```mongostat 13.77.30.12:10100 -u CN=infra -p password</li>
+</ul>
+
+  
+</md-content>

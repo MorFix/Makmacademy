@@ -1,0 +1,49 @@
+<html>
+<head>
+	<title>Makmacademy</title>
+	<link rel="stylesheet" type="text/css" href="node_modules/angular-material/angular-material.css">
+	<link rel="stylesheet" type="text/css" href="node_modules/mdi/css/materialdesignicons.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<meta charset="UTF-8" />
+</head>
+<body ng-app="makmacademy" layout="column" ng-controller="indexController">
+	<md-toolbar class="md-whiteframe-6dp md-hue-2">
+		<div class="md-toolbar-tools" layout-padding>
+			<i class="mdi mdi-school"></i>
+			<h1>MakmAcademy</h1>
+		</div>
+	</md-toolbar>
+	<div layout="row" flex>
+		<md-sidenav md-is-locked-open="true" class="md-whiteframe-5dp" mk-background="background-800" layout="column">
+			<div class="courses" flex>
+				<mk-course course="course" ng-repeat="course in ::courses | orderBy:'name'"></mk-course>
+			</div>
+			<div layout="row" layout-align="center center" mk-foreground="background-500"
+					 class="love">
+				<span>Made with </span>
+				<i class="mdi mdi-heart"></i>
+				<span> by Software Branch</span>
+			</div>
+			<div layout="row" layout-align="center center" mk-foreground="background-600"
+					 class="timestamp">
+				<span>Built on {{ generatedOn }}</span>
+			</div>
+		</md-sidenav>
+		<ui-view layout="column" mk-background="background-900" flex></ui-view>
+	</div>
+	<script type="text/javascript" src="node_modules/angular/angular.js"></script>
+	<script type="text/javascript" src="node_modules/angular-animate/angular-animate.js"></script>
+	<script type="text/javascript" src="node_modules/angular-aria/angular-aria.js"></script>
+	<script type="text/javascript" src="node_modules/angular-messages/angular-messages.js"></script>
+	<script type="text/javascript" src="node_modules/angular-material/angular-material.js"></script>
+	<script type="text/javascript" src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+	<script type="text/javascript" src="app.js"></script>
+	<script type="text/javascript" src="courses.constant.js"></script>
+	<script type="text/javascript" src="built-on.constant.js"></script>
+	<script type="text/javascript" src="index.controller.js"></script>
+	<script type="text/javascript" src="providers/theming.provider.js"></script>
+	<script type="text/javascript" src="directives/course.directive.js"></script>
+	<script type="text/javascript" src="directives/resource.directive.js"></script>
+	<script type="text/javascript" src="directives/theming.directive.js"></script>
+</body>
+</html>

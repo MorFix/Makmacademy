@@ -1,0 +1,49 @@
+<md-content class="lesson" flex mk-background="background-900">
+	
+  <h1 id="milibank">MiliBank</h1>
+<h3 id="read-before-">Read Before:</h3>
+<ul>
+<li>MVC (The design pattern, not the framework ASPNET MVC)</li>
+<li>ADO .NET</li>
+</ul>
+<h3 id="part-a">Part A</h3>
+<p>You will now build a simple bank system based on the MVC pattern, with the windows console as the UI. </p>
+<p>Your models will be the following:</p>
+<ul>
+<li>Account - Based on the same logic from exercise 2 (Write new models, both for Simple and VIP account)</li>
+<li>User - Will contain the following information:<ul>
+<li>ID</li>
+<li>Name</li>
+</ul>
+</li>
+</ul>
+<p>Every account can belong to more than a single user.
+Every user can have more than a single account.</p>
+<p>The application will provide the following actions to the user:</p>
+<ul>
+<li>List all users</li>
+<li>List all accounts for a given user with their current balance</li>
+<li>Deposit/Withdraw from a given account</li>
+<li>Create a new user</li>
+<li>Create a new account for a user</li>
+<li>Delete users and accounts</li>
+</ul>
+<p>* Only databases supported by the ADO namespace, <em>DO NOT USE OleDB</em></p>
+<p><em>NOTES:</em></p>
+<ol>
+<li>When you delete a user, you also need to delete his accounts, how do we accomplish this properly?</li>
+<li>Use the DataReader class in order to read data from the DB</li>
+<li>Implement converter classes to convert from DataReader data to your models</li>
+<li>Dispose of transactions properly and timely</li>
+<li><em>Ummm... maybe there&#39;s a design pattern for something like that</em></li>
+</ol>
+<h3 id="part-b">Part B</h3>
+<p>You will now refactor your DB access code and replace it with an ORM (Please save the previous version of your code...).</p>
+<p>The ORM you will be using is NHibernate with FluentNHibernate for the mapping.</p>
+<ol>
+<li>Map the class Account manually (create a class that inherits from ClassMap<T>)</li>
+<li>Map the class User Automatically (Convention based mapping)</li>
+</ol>
+
+  
+</md-content>

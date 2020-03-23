@@ -1,0 +1,342 @@
+<md-content class="lesson" flex mk-background="background-900">
+	
+  <h1 id="bonus-round-testing-_-yay-_">Bonus Round - Testing! <em>(yay)</em></h1>
+<p><em>Quick Guide</em> to <strong>mocha.js</strong> Test Driven Development (TDD) in <strong>node.js</strong></p>
+<p><img src="assets/mocha/cowboy-coder.png" alt="Cowboy Coder" title="Cowboy Coder"></p>
+<p>We all know <em>Cowboy Coders</em>. (<em>If you don&#39;t, its you!</em>)</p>
+<p>The &quot;<em>I just get things done</em>&quot; developer who writes &quot;<em>quick fixes</em>&quot; and
+maintains &quot;<em>I don&#39;t have time to write tests</em>&quot; or
+&quot;<em>Writing tests for my code takes longer</em>&quot; and then acts <em>surprised</em> when
+everything starts breaking ... &quot;<em>it was working this morning</em>&quot; ...</p>
+<hr>
+<h2 id="installation">Installation</h2>
+<pre><code class="lang-sh">npm install mocha -g
+</code></pre>
+<p>You should see some output <em>confirming</em> it <em>installed</em>:</p>
+<p><img src="assets/mocha/mocha-installed.png" alt="Mocha Installed" title="Mocha Installed Successfully"></p>
+<h3 id="first-tests">First Tests</h3>
+<h4 id="create-test-directory">Create Test Directory</h4>
+<p>In your project create a new <strong>/test</strong> directory to hold your tests:</p>
+<pre><code class="lang-sh">mkdir test
+</code></pre>
+<h4 id="create-test-js-file">Create test.js File</h4>
+<p>Now create a new file ./test/<strong>test.js</strong> in your text editor</p>
+<p>and write/paste the following code:</p>
+<pre><code class="lang-js">var assert = require(&quot;assert&quot;); // node.js core module
+
+describe(&#39;Array&#39;, function(){
+  describe(&#39;#indexOf()&#39;, function(){
+    it(&#39;should return -1 when the value is not present&#39;, function(){
+      assert.equal(-1, [1,2,3].indexOf(4)); // 4 is not present in this array so indexOf returns -1
+    })
+  })
+});
+</code></pre>
+<h4 id="run-test">Run Test</h4>
+<p>By typing the command <strong>mocha</strong> in your terminal the mocha comand line program
+will look for a <strong>/test</strong> directory and run any <strong>.js</strong> files it contains:</p>
+<pre><code class="lang-sh">mocha
+</code></pre>
+<p><img src="assets/mocha/mocha-1-test-passing.png" alt="Mocha 1 Test Passes" title="Mocha 1 Test Passes"></p>
+<h3 id="a-more-useful-tdd-example-cash-register-mini-project-">A More Useful TDD Example (Cash Register Mini Project)</h3>
+<p>While I&#39;m the first to agree that <em>cash-less</em> payments are the future,
+paying with cash is something <em>everyone</em> can relate to and is therefore
+a good example to use. (<em>think of better TDD example</em>? <em>tell me</em>!)</p>
+<h4 id="basic-requirements">Basic Requirements</h4>
+<blockquote>
+<p>Given a <strong>Total Payable</strong> and <strong>Cash From Customer</strong>
+Return: <strong>Change To Customer</strong> (notes and coins).</p>
+</blockquote>
+<p>Essentially we are building a <em>simple</em> <strong>calculator</strong> that <em>only does</em> <strong>subtraction</strong>
+(Total - Cash = Change), but also splits the <strong>result</strong> into the various <strong>notes &amp; coins</strong>.</p>
+<p>In the UK we have the following Notes &amp; Coins:</p>
+<p><img src="assets/mocha/gbp-notes.jpg" alt="GBP Notes" title="GBP Notes">
+<img src="assets/mocha/gbp-coins.jpg" alt="GBP Coins" title="GBP Coins"></p>
+<p>see: <a href="http://en.wikipedia.org/wiki/Banknotes_of_the_pound_sterling">http://en.wikipedia.org/wiki/Banknotes_of_the_pound_sterling</a>
+(technically there are also £100 and even £100,000,000 notes,
+but these aren&#39;t common so we can leave them out. ;-)</p>
+<p>If we use the penny as the unit (i.e. 100 pennies in a pound)
+the notes and coins can be represented as:</p>
+<ul>
+<li>5000 (£50)</li>
+<li>2000 (£20)</li>
+<li>1000 (£10)</li>
+<li>500 (£5)</li>
+<li>200 (£2)</li>
+<li>100 (£1)</li>
+<li>50 (50p)</li>
+<li>20 (20p)</li>
+<li>10 (10p)</li>
+<li>5 (5p)</li>
+<li>2 (2p)</li>
+<li>1 (1p)</li>
+</ul>
+<p>this can be represented as an Array:</p>
+<pre><code class="lang-javascript">var coins = [5000, 2000, 1000, 500, 200, 100, 50, 20, 10, 5, 2, 1]
+</code></pre>
+<p><strong>Note</strong>: the same can be done for any other cash system ($ ¥ €)
+simply use the cent, sen or rin as the unit and scale up notes.</p>
+<h4 id="the-first-test">The First Test</h4>
+<p>If you are <em>totally</em> new to TDD I recommend reading this
+<a href="http://www.agiledata.org/essays/tdd.html">intro article</a> by Scott Ambler
+(especially the diagrams) otherwise this (test-fail-code-pass) process
+may seem <em>strange</em> ...</p>
+<p>Here is a simple flow that explains TDD</p>
+<p><img src="assets/mocha/tddSteps.jpg" alt="Tdd Steps" title="Tdd Steps"></p>
+<p>In <strong>T</strong>est <strong>F</strong>irst <strong>D</strong>evelopment (TFD) we write a test <em>first</em> and <em>then</em>
+write the code that makes the test pass.</p>
+<p>so, back in our ./test/<strong>test.js</strong> file add the following line:</p>
+<pre><code class="lang-javascript">var C = require(&#39;../cash.js&#39;);  // our module
+</code></pre>
+<h4 id="watch-it-fail">Watch it Fail</h4>
+<p>Back in your terminal window, re-run the <strong>mocha</strong> command and watch it <em>fail</em>:</p>
+<pre><code class="lang-sh">mocha
+</code></pre>
+<p><img src="assets/mocha/mocha-tfd-cannot-find-module-first-fail.png" alt="Mocha TFD Fail" title="Mocha TFD Fail"></p>
+<p>This error (&quot;<strong>Cannot find module &#39;../cash.js&#39;</strong>&quot;) is pretty self explanatory.
+We haven&#39;t created the file yet so test.js is requesting a non-existent file!</p>
+<blockquote>
+<p><strong>Q</strong>: Why <em>deliberately</em> write a test we <em>know</em> is going to <em>fail</em>...? <br />
+<strong>A</strong>: To get used to the idea of <em>only</em> writing the code required to <em>pass</em>
+   the <em>current</em> (<em>failing</em>) <em>test</em>.</p>
+</blockquote>
+<h4 id="create-the-module-file">Create the Module File</h4>
+<p>Create a new file for our cash register <strong>cash.js</strong>:</p>
+<pre><code class="lang-sh">type NUL &gt; cash.js
+</code></pre>
+<p><strong>Note</strong>: We are <em>not</em> going to add any code to it just yet.</p>
+<p>Re-run the <strong>mocha</strong> command in terminal, it will pass (<em>zero</em> tests)</p>
+<p><img src="assets/mocha/mocha-0-passing.png" alt="Mocha Pass 0 Tests" title="Mocha Pass 0 Tests"></p>
+<p>Lets add a test to ./test/<strong>test.js</strong> and watch it fail again:</p>
+<pre><code class="lang-javascript">var assert = require(&quot;assert&quot;); // core module
+var C = require(&#39;../cash.js&#39;);  // our module
+
+describe(&#39;Cash Register&#39;, function(){
+  describe(&#39;Module C&#39;, function(){
+    it(&#39;should have a getChange Method&#39;, function(){
+      assert.equal(typeof C, &#39;object&#39;);
+      assert.equal(typeof C.getChange, &#39;function&#39;);
+    })
+  })
+});
+</code></pre>
+<p>Re-run <code>mocha</code>:</p>
+<p><img src="assets/mocha/mocha-first-test-failing.png" alt="Mocha 1 Test Failing" title="Mocha 1 Test Failing"></p>
+<h4 id="write-just-enough-code-to-make-the-test-pass">Write <em>Just</em> Enough Code to Make the Test Pass</h4>
+<p>Add the following to <strong>cash.js</strong>:</p>
+<pre><code class="lang-javascript">var C = {};                    // C Object simplifies exporting the module
+C.getChange = function () {    // enough to satisfy the test
+    &#39;use strict&#39;;
+    return true;               // also passes JSLint
+};
+module.exports = C;            // export the module with a single method
+</code></pre>
+<p>Re-run <code>mocha</code> (now it passes):</p>
+<p><img src="assets/mocha/mocha-1-test-pass.png" alt="Mocha 1 Test Passes" title="Mocha 1 Test Passes"></p>
+<h4 id="write-a-real-test">Write A Real Test</h4>
+<p>Going back to the requirements, we need our getChange method to accept
+two arguments/parameters (<strong>totalPayable</strong> and <strong>cashPaid</strong>) and return an
+array containing the coins equal to the difference:</p>
+<p>e.g:</p>
+<pre><code class="lang-js">totalPayable = 210         // £2.10
+cashPaid     = 300         // £3.00
+dfference    =  90         // 90p
+change       = [50,20,20]  // 50p, 20p, 20p
+</code></pre>
+<p>Add the following test to ./test/<strong>test.js</strong>:</p>
+<pre><code class="lang-javascript">it(&#39;getChange(210,300) should equal [50,20,20]&#39;, function(){
+    assert.deepEqual(C.getChange(210,300), [50,20,20]);
+})
+</code></pre>
+<p><strong>Note</strong>: use assert.<strong>deepEqual</strong> for arrays
+see: <a href="http://stackoverflow.com/questions/13225274/">http://stackoverflow.com/questions/13225274/</a></p>
+<p><img src="assets/mocha/mocha-assertionError.png" alt="Mocha Assertion Error" title="Mocha Assertion Error"></p>
+<h4 id="write-the-method-to-pass-the-test">Write the Method to Pass the Test</h4>
+<p>What if I cheat?</p>
+<pre><code class="lang-javascript">C.getChange = function (totalPayable, cashPaid) {
+    &#39;use strict&#39;;
+    return [50, 20, 20];    // just enough to pass :-)
+};
+</code></pre>
+<p>This will pass:</p>
+<p><img src="assets/mocha/mocha-2-passing.png" alt="Mocha Passing" title="Mocha 2 Passing"></p>
+<p>This only works <em>once</em>. When the Spec (Test) Writer writes the next test, the method will need
+to be re-written to satisfy it.</p>
+<p>Lets try it.  Work out what you expect:</p>
+<pre><code>totalPayable = 486           // £4.86
+cashPaid     = 1000          // £10.00
+dfference    = 514           // £5.14
+change       = [500,10,2,2]  // £5, 10p, 2p, 2p
+</code></pre>
+<p>Add the following test to ./test/<strong>test.js</strong> and re-run <code>mocha</code>:</p>
+<pre><code class="lang-javascript">it(&#39;getChange(486,1000) should equal [500, 10, 2, 2]&#39;, function(){
+    assert.deepEqual(C.getChange(486,1000), [500, 10, 2, 2]);
+})
+</code></pre>
+<p>As expected, our lazy method fails:</p>
+<p><img src="assets/mocha/mocha-2-passing-1-fail.png" alt="Mocha 3 Test Fails" title="Mocha 3rd Test Fails"></p>
+<h4 id="keep-cheating-or-solve-the-problem-">Keep Cheating or Solve the Problem?</h4>
+<p>We could keep cheating by writing a series of if statements:</p>
+<pre><code class="lang-javascript">C.getChange = function (totalPayable, cashPaid) {
+    &#39;use strict&#39;;
+    if(totalPayable == 486 &amp;&amp; cashPaid == 1000)
+        return [500, 10, 2, 2];
+    else if(totalPayable == 210 &amp;&amp; cashPaid == 300)
+        return [50, 20, 20];
+};
+</code></pre>
+<p>The <em>Arthur Andersen Approach</em> gets results:</p>
+<p><img src="assets/mocha/mocha-3-passing.png" alt="Mocha 3 Passing" title="Mocha 3 Passing"></p>
+<p>But its arguably <em>more work</em> than simply <em>solving</em> the problem.
+Lets do that instead.
+(<strong>Note</strong>: this is the <em>readable</em> version of the solution! feel free to suggest a more compact algorithm)</p>
+<pre><code class="lang-javascript">var C = {};     // C Object simplifies exporting the module
+C.coins = [5000, 2000, 1000, 500, 200, 100, 50, 20, 10, 5, 2, 1]
+C.getChange = function (totalPayable, cashPaid) {
+    &#39;use strict&#39;;
+    var change = [];
+    var length = C.coins.length;
+    var remaining = cashPaid - totalPayable;          // we reduce this below
+
+    for (var i = 0; i &lt; length; i++) { // loop through array of notes &amp; coins:
+        var coin = C.coins[i];
+
+        if(remaining/coin &gt;= 1) { // check coin fits into the remaining amount
+            var times = Math.floor(remaining/coin);        // no partial coins
+
+            for(var j = 0; j &lt; times; j++) {     // add coin to change x times
+                change.push(coin);
+                remaining = remaining - coin;  // subtract coin from remaining
+            }
+        }
+    }
+    return change;
+};
+</code></pre>
+<p>Add one more test to ensure we are <em>fully</em> exercising our method:</p>
+<pre><code>totalPayable = 1487                                 // £14.87  (fourteen pounds and eighty-seven pence)
+cashPaid     = 10000                                // £100.00 (one hundred pounds)
+dfference    = 8513                                 // £85.13
+change       = [5000, 2000, 1000, 500, 10, 2, 1 ]   // £50, £20, £10, £5, 10p, 2p, 1p
+</code></pre>
+<pre><code class="lang-javascript">it(&#39;getChange(1487,10000) should equal [5000, 2000, 1000, 500, 10, 2, 1 ]&#39;, function(){
+    assert.deepEqual(C.getChange(1487,10000), [5000, 2000, 1000, 500, 10, 2, 1 ]);
+});
+</code></pre>
+<p><img src="assets/mocha/mocha-4-tests-passing.png" alt="Mocha 4 Passing" title="Mocha 4 Passing"></p>
+<hr>
+<h3 id="bonus-level">Bonus Level</h3>
+<h4 id="code-coverage">Code Coverage</h4>
+<p>We are using istanbul for code coverage.
+If you are new to istanbul check out my brief tutorial:
+<a href="https://github.com/nelsonic/learn-istanbul">https://github.com/nelsonic/learn-istanbul</a></p>
+<p>Install istanbul:</p>
+<pre><code class="lang-sh">npm install istanbul -g
+</code></pre>
+<p>Install mocha locally(bug in windows, istanbul won&#39;t find the right mocha file unless install locally):</p>
+<pre><code class="lang-sh">npm install mocha
+</code></pre>
+<p>Run the following command to get a coverage report:</p>
+<pre><code class="lang-sh">istanbul cover npm_modules/mocha/bin/_mocha -- -R spec
+</code></pre>
+<p>You should see:</p>
+<p><img src="assets/mocha/istanbul-cover-mocha.png" alt="Istanbul Coverage" title="Istanbul Code Coverage"></p>
+<p>or if you prefer the <strong>lcov-report</strong>: (check under coverage/lcov-report/index.html)</p>
+<p><img src="assets/mocha/istanbul-coverage-report.png" alt="Istanbul Coverage Report" title="Istanbul Code Coverage Report"></p>
+<blockquote>
+<p><strong>100% Coverage</strong> for Statements, Branches, Functions and Lines.</p>
+</blockquote>
+<p>Done.</p>
+<hr>
+<h3 id="background">Background</h3>
+<h4 id="what-is-mocha-">What is Mocha?</h4>
+<p>Mocha is a <strong>JavaScript test framework</strong> running on <strong>node.js</strong>
+<em>and</em> the <strong>browser</strong>.</p>
+<p><img src="assets/mocha/mocha-logo.png" alt="Mocha Logo" title="Mocha Logo"></p>
+<p>Made by <a href="https://twitter.com/tjholowaychuk">TJ Holowaychuk</a> creator of
+<a href="https://github.com/visionmedia/express">Express</a> (<em>by far</em> the <em>most popular</em>
+node.js web framework), Mocha is TJ&#39;s answer to the problem of testing JavaScript.</p>
+<ul>
+<li>Site: <a href="http://mochajs.org">http://mochajs.org</a></li>
+<li>Code: <a href="https://github.com/mochajs/mocha">https://github.com/mochajs/mocha</a></li>
+</ul>
+<h4 id="why-mocha-">Why Mocha?</h4>
+<p>At last count there were 83 testing frameworks <em>listed</em> on the node.js
+modules page: <a href="https://github.com/joyent/node/wiki/modules#wiki-testing">https://github.com/joyent/node/wiki/modules#wiki-testing</a>
+this is <em>both</em> a problem (<em>too much choice</em> can be
+<em>overwhelming</em>) and good thing (diversity means new ideas and innovative
+solutions can flourish).</p>
+<p>There&#39;s no hard+fast rule for &quot;<em>which testing framework is the best one</em>?&quot;</p>
+<p>Over the past 3 years I&#39;ve tried:
+<a href="http://nodejs.org/api/assert.html">Assert (Core Module)</a>,
+<a href="https://github.com/cucumber/cucumber-js">Cucumber</a>,
+<a href="https://github.com/visionmedia/expresso">Expresso</a>
+<a href="https://github.com/mhevery/jasmine-node">Jasmine</a>,
+<a href="https://github.com/mochajs/mocha">Mocha</a>,
+<a href="https://github.com/caolan/nodeunit">Nodeunit</a>,
+<a href="https://github.com/visionmedia/should.js">Should</a>, and
+<a href="https://github.com/cloudhead/vows">Vows</a></p>
+<p>My <strong>criteria</strong> for choosing a testing framework:</p>
+<ul>
+<li><strong>Simplicity</strong> (one of TJ&#39;s <em>stated aims</em>)</li>
+<li><strong>Elegance</strong> (<em>especially when written in CoffeeScript</em>)</li>
+<li><strong>Speed</strong> (Mocha is <em>Fast</em>. 300+ tests run in under a second)</li>
+<li><strong>Documentation</strong> (plenty of real-world examples: <a href="http://mochajs.org">http://mochajs.org</a>)</li>
+<li><strong>Maturity</strong> (<em>Battle-tested</em> by <em>thousands</em> of developers!)</li>
+</ul>
+<p>Advanced:</p>
+<ul>
+<li>Easy to Trouble-shoot (Plenty of <em>Answered</em> Questions on
+<a href="http://stackoverflow.com/questions/tagged/mocha?sort=frequent&amp;pageSize=15">stackoverflow</a>)</li>
+<li>Automatic Test Running when File Changes (using
+<a href="https://github.com/bevry/watchr">Watchr</a>/<a href="http://gruntjs.com/">Grunt</a>)</li>
+<li>Detailed reports of test execution (extensible reports!)</li>
+</ul>
+<h3 id="notes">Notes</h3>
+<h4 id="other-mocha-tutorials-background">Other Mocha Tutorials/Background</h4>
+<ul>
+<li>DailyJS Mocha: <a href="http://dailyjs.com/2011/12/08/mocha/">http://dailyjs.com/2011/12/08/mocha/</a></li>
+<li>Azat&#39;s Mocha Tutorial: <a href="http://webapplog.com/test-driven-development-in-node-js-with-mocha/">http://webapplog.com/test-driven-development-in-node-js-with-mocha/</a></li>
+<li>NetTuts: <a href="http://net.tutsplus.com/tutorials/javascript-ajax/better-coffeescript-testing-with-mocha/">http://net.tutsplus.com/tutorials/javascript-ajax/better-coffeescript-testing-with-mocha/</a></li>
+<li>Grunt.js Mocha Plugins: <a href="http://gruntjs.com/plugins/mocha">http://gruntjs.com/plugins/mocha</a></li>
+<li>Test Coverage with Mocha: <a href="http://stackoverflow.com/questions/16633246/code-coverage-with-mocha">http://stackoverflow.com/questions/16633246/code-coverage-with-mocha</a></li>
+</ul>
+<h4 id="test-driven-development-tdd-background-philosophy">Test Driven Development (TDD) Background/Philosophy</h4>
+<ul>
+<li>Wikipedia (duh!): <a href="http://en.wikipedia.org/wiki/Test-driven_development">http://en.wikipedia.org/wiki/Test-driven_development</a></li>
+<li>Excellent Explanation by Scott Ambler: <a href="http://www.agiledata.org/essays/tdd.html">http://www.agiledata.org/essays/tdd.html</a></li>
+</ul>
+<h4 id="further-reading">Further Reading</h4>
+<ul>
+<li>Testing takes &quot;<em>twice as long</em>&quot; (Myth): <a href="http://googletesting.blogspot.co.uk/2009/10/cost-of-testing.html">http://googletesting.blogspot.co.uk/2009/10/cost-of-testing.html</a></li>
+<li>Estimating Testing Effort as % of Development Time: <a href="http://stackoverflow.com/questions/1595346/estimating-of-testing-effort-as-a-percentage-of-development-time">http://stackoverflow.com/questions/1595346/estimating-of-testing-effort-as-a-percentage-of-development-time</a></li>
+<li>Technical Debt (Bad Code): <a href="http://jessewarden.com/2010/07/agile-chronicles-12-technical-debt.html">http://jessewarden.com/2010/07/agile-chronicles-12-technical-debt.html</a></li>
+<li>Agile = an excuse for cowboys? Discussion: <a href="http://programmers.stackexchange.com/questions/11188/is-the-agile-approach-too-much-of-a-convenient-excuse-for-cowboys">http://programmers.stackexchange.com/questions/11188/is-the-agile-approach-too-much-of-a-convenient-excuse-for-cowboys</a></li>
+<li>TDD Examples: <a href="http://stackoverflow.com/questions/1920259/recommend-good-online-sample-walkthrough-of-tdd/7213630#7213630">http://stackoverflow.com/questions/1920259/recommend-good-online-sample-walkthrough-of-tdd/7213630#7213630</a></li>
+</ul>
+<hr>
+<h4 id="trying-to-think-of-a-good-example-for-tdd-">Trying to think of a good example for TDD ...</h4>
+<ul>
+<li>Bowling: <a href="http://www.objectmentor.com/resources/articles/xpepisode.htm">http://www.objectmentor.com/resources/articles/xpepisode.htm</a></li>
+<li>Sudoku: <a href="http://johannesbrodwall.com/2010/04/06/why-tdd-makes-a-lot-of-sense-for-sudoko/">http://johannesbrodwall.com/2010/04/06/why-tdd-makes-a-lot-of-sense-for-sudoko/</a></li>
+<li>Vending machine.</li>
+<li>Cash Register.</li>
+<li>Roman Numerals: <a href="http://www.diveintopython.net/">http://www.diveintopython.net/</a></li>
+</ul>
+<h4 id="rant">Rant</h4>
+<p>Code without tests is like a <em>building without a foundation</em>!</p>
+<p><img src="assets/mocha/building-collapse-940x627.jpg" alt="Building Collapse" title="Building Collapse"></p>
+<p>Its only a matter of <em>time</em> before it all comes crashing down ...</p>
+<p>Is Test Driven Development (TDD) a <em>silver bullet</em> for <em>all</em> my software
+development woes? <em>Short answer</em>: <strong>No</strong>.
+There is a <em>lot</em> more that goes into writing <em>great</em> software than
+<em>just</em> having tests. But <em>without tests</em> reliability is <em>impossible</em>.</p>
+<p>If you are <em>not</em> doing TDD in your projects I&#39;m probably not going to be
+the one to change your mind by evangelizing about it. I know plenty of
+people calling themesleves &quot;developers&quot; who stubbornly cling to the idea
+that testing is for &quot;QA&quot; or &quot;That&#39;s why we have testers&quot; and wish them
+nothing but the best of luck! I just cant&#39;t work with you or use your
+&quot;product&quot;, no hard feelings. :-)</p>
+
+  
+</md-content>

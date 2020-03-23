@@ -1,0 +1,66 @@
+<md-content class="lesson" flex mk-background="background-900">
+	
+ <p>
+  <mk-resource href="assets/advanced-net/Cookbook.zip"></mk-resource>
+ </p>
+<h1 id="cookbook">Cookbook</h1>
+<p>Congratulations on completing the basic .NET training!</p>
+<p>Now you will write a shared cookbook application.</p>
+<h2 id="1-main-concept">1.    Main Concept</h2>
+<p>The application will have a database of recipes, each recipe will have information regarding its ingredients and directions for making it.</p>
+<p>Users will be able to register and log in, once the user is logged in they will be able to create recipes, update and delete their own recipes and save their favorites recipes.</p>
+<h2 id="2-detailed-requirements">2. Detailed Requirements</h2>
+<h3 id="2-1-recipe">2.1 Recipe</h3>
+<p>A recipe is a collection of ingerdients with the steps for making it and general data about it like a category and a name.</p>
+<p>Users can see all the recipes in the database, they can edit only their recipes.</p>
+<p>The application should support filtering by categories, searching by name and by ingredients.</p>
+<h3 id="2-2-ingredients">2.2 Ingredients</h3>
+<p>An ingredient represents an item required for making recipes, it may be used for a number of different recipes.</p>
+<p>Recipes will contain a list of the required ingredients, each with the amount required for the recipe.</p>
+<p>Users will be able to view all recipes containing a given ingredient, for example, look for all recipes containing broccoli as an ingredient.</p>
+<h3 id="2-3-instructions">2.3 Instructions</h3>
+<p>A single step in a recipe, a recipe is composed of a list of instructions in a fixed order.</p>
+<p>Instructions may have additional information about them, like the average time for this step, included ingredients and more.</p>
+<h3 id="2-4-user">2.4 User</h3>
+<p>Users will register before visiting the application, registration requires a username and a password.</p>
+<p>After logging in users can see the entire database and enjoy our application. If they find a recipe they like they can mark it as favorite and view their favorite recipes later.</p>
+<h2 id="3-technology">3. Technology</h2>
+<p>This exercise can be done both in WPF and WinForms, ask your guide which one you should work with.</p>
+<h3 id="3-1-wpf">3.1 WPF</h3>
+<ul>
+<li>Write your application using MVVM</li>
+</ul>
+<h3 id="3-2-winforms">3.2 WinForms</h3>
+<ul>
+<li>Write your application using MVC</li>
+</ul>
+<h2 id="4-api"> 4. Api</h2>
+
+<p>In this exercise you will work with external server at http://localhost:9754/.</p>
+<p>To launch the server, download the attachment, extract it to C:\ and then run the following commands in a CMD AS ADMIN:</p>
+<ul>
+<li><code>sc create "CookbookServer" binPath= "C:\CookbookServer\Cookbook.Server.exe"</code></li>
+<li><code>sc start CookbookServer</code></li>
+</ul>
+<p>In addition, you can download a common dll to help you communicate with the server.</p>
+
+<h3 id="users">Users - api/user</h3>
+<ul>
+<li><code>POST /login</code> - Login to the app (LoginUserViewModel)</li>
+<li><code>POST /register</code> - Register to the app (NewUserViewModel)</li>
+<li><code>GET /logout</code> - Logout</li>
+</ul>
+
+<h3 id="recipes"> Recpies - api/recipe</h3>
+<ul>
+<li><code>GET /</code> - Get all the recipes</li>
+<li><code>POST /</code> - Insert recipe (RecipeViewModel)</li>
+<li><code>PUT /</code> - Update recipe (RecipeViewModel)</li>
+<li><code>DELETE /:id</code> - Delete recipe</li>
+<li><code>POST /:id</code> - toggle favorite (Use an empty StringContent as it's content)</li>
+</ul>
+<h2 id="methodologies">Methodologies</h2>
+<p>In this exercise you will work with the agile methodology using TFS, sit with your guide and commander to plan the tasks for the sprint.</p>
+
+  
+</md-content>

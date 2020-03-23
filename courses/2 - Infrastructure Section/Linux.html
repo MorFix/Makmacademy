@@ -1,0 +1,95 @@
+<md-content class="lesson" flex mk-background="background-900">
+	
+  <h1 id="linux">Linux</h1>
+<h2 id="putty">Putty</h2>
+<p>In order to connect to a linux computer/server you need to establish an SSH connection. We use putty.exe to do so.</p>
+<p>Putty is a simple remote command line for connecting from windows to unix based systems.</p>
+<p>The remote connection is available thanks to the SSH protocol based on port 22 which opens a tunnel to the Unix OS
+and directs the input from a remote keyboard and directs the output to the remote command line.</p>
+<p>Just open <a href="assets/infra/putty.exe">putty.exe</a></p>
+<h2 id="basic-commands">Basic Commands</h2>
+<ul>
+<li><code>cd Directory</code> - open directory</li>
+<li><code>cd ..</code> - go up 1 directory</li>
+<li><code>ls</code> - show directory content (can send a directory path as parameter)</li>
+<li><code>mkdir</code> - create a directory</li>
+<li><code>hostname</code> - get the name of the host</li>
+<li><code>whoami</code> - get the current username</li>
+<li><code>sudo COMMAND</code> - run COMMAND as root</li>
+<li><code>su mongdbuser</code> - change current user to mongdbuser</li>
+<li><code>pwd</code> - print current directory</li>
+</ul>
+<h2 id="more-complex-commands">More complex commands</h2>
+<ul>
+<li>Get machine IP:<pre><code>MACHINE_IP=$(ifconfig | grep -Eo &#39;inet (addr:)?([0-9]*\.){3}[0-9]*&#39; | grep -v &#39;127.0.0.1&#39; | grep -Eo &#39;([0-9]*\.){3}[0-9]*&#39;)
+</code></pre>
+</li>
+<li>Stop/Start service or get its status:<pre><code>service mongod start
+service mongod stop
+service mongod status
+</code></pre>
+</li>
+<li>Turn off iptables (linux default firewall):<pre><code>chkconfig --level 0123456 iptables off
+service iptables stop
+</code></pre>
+</li>
+<li><p>Edit a text file:</p>
+<pre><code>vi filename.txt
+</code></pre>
+<ul>
+<li>To start editing press INSERT</li>
+<li>To stop editing press ESC</li>
+<li>To save and close press :wq + ENTER</li>
+<li>To exit without saving :q + ENTER</li>
+</ul>
+</li>
+<li><p>Install an rpm package from the yum server:</p>
+<pre><code>yum install --nogpgcheck -y mongodb-*
+</code></pre>
+<ul>
+<li>--nogpgcheck means not to verify the rpm (needed for mongodb installation)</li>
+<li>-y means to install silently</li>
+<li>mongodb-* means to install all packages that their names start with mongodb-</li>
+</ul>
+</li>
+<li><p>List directory contents - pass to a filter function and filter to files named ADAM</p>
+<pre><code>find /opt/dir | grep ADAM
+</code></pre>
+</li>
+<li>Add user mongod to group mongdbuser<pre><code>sudo usermod -a -G mongod mongdbuser
+</code></pre>
+</li>
+<li><p>Convert a pfx certificate (windows format) to a pem certificate (linux format) password protected in pkcs12</p>
+<pre><code>openssl pkcs12 -in &quot;/opt/dir/cert.pfx&quot; -passin pass:&quot;123&quot; -out &quot;/opt/dir/cert.pem&quot; -passout pass:&quot;1234&quot;
+</code></pre>
+</li>
+<li><p>Replace a line in a text file (can use regex) with a given value</p>
+<pre><code>sed --in-place &quot;/Old line value regex/c\New line value string&quot; /opt/file.txt&quot;
+</code></pre>
+<ul>
+<li>--in-place : save the output as the same file</li>
+</ul>
+</li>
+<li><p>Change the owner of a directory.</p>
+<pre><code>chown -R mongod:mongod &quot;/opt/dir&quot;
+</code></pre>
+<ul>
+<li>Change the owner of /opt/dir to mongod with the group identifier of mongod (name:group)</li>
+</ul>
+</li>
+<li><p>Change the permissions for a directory.</p>
+<pre><code>chmod -R 660 &quot;/opt/dir&quot;
+</code></pre>
+<ul>
+<li>-R for recursive</li>
+<li>Read about the Read/Write/Execute permissions for User/Group/Other user groups</li>
+</ul>
+</li>
+<li><p>Cron is a daemon used to execute desired tasks (in the background)</p>
+<pre><code>crontab -l | { cat; echo &quot;0 * * * * logrotate /opt/dir/logrotate.conf&quot;; } | crontab -
+</code></pre>
+</li>
+</ul>
+
+  
+</md-content>
