@@ -35,6 +35,6 @@
     "object-assign": "^2.0.0",
     "q": "~0.8.11",
     "react": "^0.13.1",
-    "underscore": "~1.4.3"
+    "underscore": "~1.12.1"
   }
 }
